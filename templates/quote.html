@@ -4,10 +4,12 @@
 {% endblock %}
 
 {% block main %}
-    <form action="https://cloud-sse.iexapis.com/stable/stock/nflx/quote?token=API_KEY", method="GET">
+    <form action="/quote", method="POST">
         <div>
             <input name="quote" autofocus class="form-control" type="text" placeholder="Symbol">
         </div>
+        <br>
         <button class="btn btn-primary" type="submit">Quote</button>
     </form>
+    <hr>
 {% endblock %}

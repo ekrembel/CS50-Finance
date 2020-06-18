@@ -1,5 +1,6 @@
 import os
-
+import requests
+import json
 from cs50 import SQL
 from flask import Flask, flash, jsonify, redirect, render_template, request, session
 from flask_session import Session
@@ -61,8 +62,8 @@ def index():
         }
     ]
     for row in rows:
-        cashRemain = 10000.00 - row["total"]
-    value = 10000.00
+        cashRemain = usd(10000.00 - row["total"])
+    value = usd(10000.00)
     name = "Ekrem"
     return render_template("portfolio.html", rows=rows, cashRemain=cashRemain, value=value, name=name)
     # return apology("TODO")
@@ -134,8 +135,18 @@ def logout():
 @login_required
 def quote():
     """Get stock quote."""
-    return render_template("quote.html")
-    return apology("TODO")
+    if request.method == "GET":
+        return render_template("quote.html")
+    else:
+        userInquiry = request.form.get("quote")
+
+        r = requests.get(f"https://cloud-sse.iexapis.com/stable/stock/{userInquiry}/quote?token=pk_f7b30f305a8c4aef8eaec49711a8344e")
+        data = json.loads(r.text)
+        name = data["companyName"]
+        price = usd(data["latestPrice"])
+        symbol = data["symbol"]
+        return render_template("quoted.html", name=name, price=price, symbol=symbol)
+    # return apology("TODO")
 
 
 @app.route("/register", methods=["GET", "POST"])
