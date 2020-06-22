@@ -1,0 +1,29 @@
+{% extends "layout.html" %}
+
+{% block main %}
+    <form action="/buy" method="POST">
+        <div>
+            <input id="symbol" autofocus autocomplete="off" class="form-control" name="buy" type="text" placeholder="Symbol">
+        </div>
+        <br>
+        <div>
+            <input id="shares" class="form-control" name="shares" type="number" placeholder="Shares">
+        </div>
+        <br>
+        <button onclick="buyStock()" class="btn btn-primary" type="submit">Buy</button>
+    </form>
+    <script>
+        function buyStock() {
+            company_symbol = document.getElementById("symbol").value;
+            num_of_shares = document.getElementById("shares").value;
+            if (company_symbol === "") {
+                alert("Please enter a symbol!");
+                event.preventDefault();
+            }
+            else if ((num_of_shares === "") || (num_of_shares <= 0)) {
+                alert("Please enter a positive whole number in the shares field!");
+                event.preventDefault();
+            }
+        }
+    </script>
+{% endblock %}

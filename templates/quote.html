@@ -4,9 +4,10 @@
 {% endblock %}
 
 {% block main %}
+    <div style="color: Crimson;">{{notFound}}</div> <br>
     <form action="/quote", method="POST">
         <div>
-            <input name="quote" autofocus class="form-control" type="text" placeholder="Symbol">
+            <input name="quote" autofocus autocomplete="off" class="form-control" type="text" placeholder="Symbol">
         </div>
         <br>
         <button class="btn btn-primary" type="submit">Quote</button>

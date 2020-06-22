@@ -1,0 +1,23 @@
+{% extends "layout.html" %}
+
+{% block main %}
+    <table class="table">
+        <tr class="table-header">
+            <th>Symbol</th>
+            <th>Shares</th>
+            <th>Price</th>
+            <th>Transacted</th>
+            <th>Transaction Type</th>
+        </tr>
+        {% for row in rows %}
+            <tr class="table-row">
+                <td>{{row["symbol"]}}</td>
+                <td>{{row["shares"]}}</td>
+                <td>{{row["price"]}}</td>
+                <td>{{row["transacted"]}}</td>
+                <td>{{row["transaction"]}}</td>
+            </tr>
+        {% endfor %}
+    </table>
+    <hr>    
+{% endblock %}

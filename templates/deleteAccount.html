@@ -1,0 +1,30 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Delete Account
+{% endblock %}
+
+{% block main %}
+
+    <div style="color: crimson;">{{errorMessage}}</div> <br>
+    <form action="/deleteAccount", method="POST">
+        <input onkeyup="color()" id="password" name="password" autocomplete="off" class="form-control" type="text" placeholder="password"> <br> <br>
+        <button onclick="deleteAccount()" class="btn btn-primary" type="submit">Delete My Account</button>
+    </form>
+    <script>
+        function deleteAccount() {
+            password = document.getElementById("password").value;
+            if (password === "") {
+                alert("Please enter your password!");
+                document.getElementById("password").style.borderColor = "Crimson";
+                event.preventDefault();
+            }
+        }
+        function color() {
+            password = document.getElementById("password").value;
+            if (password !== "") {
+                document.getElementById("password").style.borderColor = "#ced4da";
+            }
+        }
+    </script>
+{% endblock %}

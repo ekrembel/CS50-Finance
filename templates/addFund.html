@@ -1,0 +1,111 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Add Fund
+{% endblock %}
+
+{% block main %}
+    <div>Your current balance is {{balance}}.</div> <br>
+    <form action="/addFund", method="POST">
+        <input onkeyup="amountToFund()" id="fund" name="fund" class="form-control" type="text" placeholder="Amount"> <br> <br>
+        <input onkeyup="userName()" id="name" name="name" class="form-control" type="text" placeholder="Name On Card"> <br> <br>
+        <input onkeyup="cardNumber()" id="number" name="number" class="form-control" type="text" placeholder="Card Number"> <br> <br>
+        <input onkeyup="securityNumber()" id="ccv" name="ccv" class="form-control" type="text" placeholder="CCV"> <br> <br>
+        <input onkeyup="expirationDate()" id="date" name="date" class="form-control" type="text" placeholder="Expiration Date"> <br> <br>
+        <button onclick="submitForm()" class="btn btn-primary" type="submit">Buy</button>
+    </form>
+    <script>   
+        function userName() {
+            user_name = document.getElementById("name").value;
+            if (user_name === "") {
+                document.getElementById("name").style.borderColor = "red";
+            }
+            else {
+                document.getElementById("name").style.borderColor = "#ced4da";
+            }
+        }
+
+        function cardNumber() {
+            card_number = document.getElementById("number").value;
+            if (card_number === "") {
+                document.getElementById("number").style.borderColor = "red";
+            }
+            else {
+                document.getElementById("number").style.borderColor = "#ced4da";
+            }
+        }
+
+        function securityNumber() {
+            security_number = document.getElementById("ccv").value;
+            if (security_number === "") {
+                document.getElementById("ccv").style.borderColor = "red";
+            }
+            else {
+                document.getElementById("ccv").style.borderColor = "#ced4da";
+            }
+        }
+
+        function expirationDate() {
+            expiration_date = document.getElementById("date").value;
+            if (expiration_date === "") {
+                document.getElementById("date").style.borderColor = "red";
+            }
+            else {
+                document.getElementById("date").style.borderColor = "#ced4da";
+            }
+        }
+        function amountToFund() {
+            amount_to_fund = document.getElementById("fund").value;
+            if (amount_to_fund === "") {
+                document.getElementById("fund").style.borderColor = "red";
+            }              
+            else {
+                document.getElementById("fund").style.borderColor = "#ced4da"; 
+            }
+        }
+
+        function submitForm() {
+            amount_to_fund = document.getElementById("fund").value;
+            user_name = document.getElementById("name").value;
+            card_number = document.getElementById("number").value;
+            security_number = document.getElementById("ccv").value;
+            expiration_date = document.getElementById("date").value;
+            if (amount_to_fund === "") {
+                alert("Please enter an amount!");
+                document.getElementById("fund").style.borderColor = "red";
+                event.preventDefault();
+            }
+            else if (user_name === "") {
+                alert("Please enter the name on the card!");
+                document.getElementById("name").style.borderColor = "red";
+                event.preventDefault();
+            }
+            else if (card_number === "") {
+                alert("Please enter the card number!");
+                document.getElementById("number").style.borderColor = "red";
+                event.preventDefault();
+            }
+            else if (security_number === "") {
+                alert("Please enter the 3-digit number on the back of the card!");
+                document.getElementById("ccv").style.borderColor = "red";
+                event.preventDefault();
+            }
+            else if (expiration_date === "") {
+                alert("Please enter the expiration date!");
+                document.getElementById("date").style.borderColor = "red";
+                event.preventDefault();
+            }
+            else if (parseFloat(amount_to_fund) <= 0) {
+                alert("Please enter a positive number in the amount field!");
+                document.getElementById("fund").style.borderColor = "red";
+                event.preventDefault();
+            }
+            else if (typeof parseFloat(amount_to_fund) === NaN) {
+                alert("Please enter a number in the amount field!");
+                document.getElementById("fund").style.borderColor = "red";
+                event.preventDefault();                
+            }
+        }
+    </script>
+{% endblock %}
+
